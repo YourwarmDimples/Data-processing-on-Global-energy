@@ -88,17 +88,17 @@ name_value_array = np.array(name_value_list)
 name_list = list(name_value_array[:, 0])
 shapely_list = []
 
-# 重要问题:每次运行之后会把 "上海" 都删除
+# 重要问题:每次运行之后会把 "天津" 都删除
 for item in name_value_list:
-    if "上海" in item[0]:
-        if item[0] == ["上海"]:
+    if "天津" in item[0]:
+        if item[0] == ["天津"]:
             w = name_value_list[name_value_list.index(item)][2]
             contribution_shanghai = item[1]
             shapely = w * contribution_shanghai
             shapely_list.append(shapely)
         else:
             w = name_value_list[name_value_list.index(item)][2]
-            item[0].remove("上海")
+            item[0].remove("天津")
             index = name_list.index(item[0])
             contribution_shanghai = item[1] - name_value_list[index][1]
             shapely = w * contribution_shanghai
