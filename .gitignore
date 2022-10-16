@@ -1,5 +1,7 @@
 # 忽略.class后缀的所有文件
 *.idea
+*.png
+*.jpg
 
 # 忽略名称中末尾为ignore的文件夹
 *idea/

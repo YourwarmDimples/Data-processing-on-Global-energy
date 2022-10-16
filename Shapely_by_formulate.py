@@ -101,20 +101,43 @@ def cal_shapely(city):
                 w = name_value_list[name_value_list.index(item)][2]
                 contribution_shanghai = item[1]
                 shapely = w * contribution_shanghai
-                shapely_list.append(shapely)
+                shapely_list.append([shapely, item[0]])
             else:
                 w = name_value_list[name_value_list.index(item)][2]
                 item[0].remove(city)
                 index = name_list.index(item[0])
                 contribution_shanghai = item[1] - name_value_list[index][1]
                 shapely = w * contribution_shanghai
-                shapely_list.append(shapely)
+                shapely_list.append([shapely, item[0]])
+
+    return shapely_list
 
 
 if __name__ == "__main__":
     city = str(input("请输入城市名(中文):\n"))
     if city in country_list:
         cal_shapely(city)
-        print("The final shapely value of city {} is {}".format(city, sum(shapely_list)))
+        shapely_array = np.array(shapely_list)
+        print("The final shapely value of city {} is {}".format(city, sum(shapely_array[:, 0])))
+        shapely_value_list = list(shapely_array[:, 0])
+        print(max(shapely_array[:, 0]))
+        index = shapely_value_list.index(max(shapely_array[:, 0]))
+        print(shapely_list[index][1])
     else:
         print("不包括此城市，请重新运行！")
+    '''
+    city = country_list
+
+    shapely_city = []
+    shapely_val = []
+    i = 0
+    for j in range(0, len(country_list)):
+        name = country_list[i]
+        shapely_city.append(name)
+        shapely_list_cal = cal_shapely(name)
+        shapely_val.append(shapely_list_cal)
+
+    print(shapely_val)
+    df = pd.DataFrame(shapely_val, index=shapely_city)
+    df.T.to_csv(r"F:/shapely_value.csv", index=False, encoding="UTF-8-SIG")
+    '''

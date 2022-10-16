@@ -104,6 +104,6 @@ for item in name_value_list:
             shapely = w * contribution_shanghai
             shapely_list.append(shapely)
 
-print(shapely_list)
-print(sum(shapely_list))
+df = pd.DataFrame(shapely_list, columns=["Shandong"])
+df.to_csv(r"Shandong.csv", index=False, encoding="UTF-8-SIG")
 
